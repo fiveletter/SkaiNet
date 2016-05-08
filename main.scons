@@ -1,0 +1,13 @@
+# Arrange to build skynet program
+
+sourceFiles = [
+  'main.cpp',
+]
+
+compileTFlags = [
+  '-lwiringPi',
+]
+
+env = Environment(CPPFLAGS = compileTFlags)
+
+env.Program('skynet', source=sourceFiles)

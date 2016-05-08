@@ -1,0 +1,6 @@
+# For projects that use Scons for building
+.sconsign.dblite
+
+# Ignore the build directory
+build/
+
