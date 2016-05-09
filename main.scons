@@ -1,13 +1,16 @@
 # Arrange to build skynet program
 
 sourceFiles = [
-  'main.cpp',
+    'main.cpp',
+    'motorDriver/src/sn_gpio.cpp',
 ]
 
 compileTFlags = [
-  '-lwiringPi',
+    '-lwiringPi',
+    '-Wall',
 ]
 
 env = Environment(CPPFLAGS = compileTFlags)
+env.Append(LINKFLAGS = ['-lwiringPi'])
 
 env.Program('skynet', source=sourceFiles)
