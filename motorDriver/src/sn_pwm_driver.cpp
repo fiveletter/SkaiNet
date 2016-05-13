@@ -28,6 +28,7 @@ bool SN_pwm_driver::set_frequency(int frequency)
 
     SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(MODE_1_ADDR, SLEEP_BIT_SET);         ///< Set sleep mode to change prescaler
     
+    // Calculate prescaler    
     if (frequency >= SN_pwm_driver::MIN_FREQUENCY && frequency <= SN_pwm_driver::MAX_FREQUENCY) {	///< Checks that frequency is in range
         prescaler = round((25000000 / (4096 * frequency)));
     }
