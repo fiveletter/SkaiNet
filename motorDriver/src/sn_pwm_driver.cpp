@@ -1,5 +1,6 @@
 #include "../sn_pwm_driver_i2c.hpp"
 #include <wiringPiI2C.h>
+#include <math.h>
 
 SN_pwm_driver* SN_pwm_driver::c_instance = 0;
 
@@ -25,10 +26,12 @@ bool SN_pwm_driver::set_frequency(int frequency)
     
     SN_pwm_driver::current_frequency = frequency;
 
-    SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(MODE_1_ADDR, SLEEP_BIT_SET);         ///< Set sleep mode to change prescaler (?) forget if its set or unset...
-    /*
-    DELETE THIS COMMENT IN PLACE OF PRESCALER CALCULATION
-    */
+    SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(MODE_1_ADDR, SLEEP_BIT_SET);         ///< Set sleep mode to change prescaler
+    
+    if (frequency >= 24 && frequency <= 1526) {			///< Checks that frequency is in range
+        prescaler = round((25000000 / (4096 * frequency)));
+    }
+
     SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(PRESCALER_ADDR, prescaler);    ///< Set prescaler register with new calculated value
     SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(MODE_1_ADDR, 0x00);         ///< Unset sleep mode bit
     
