@@ -1,4 +1,6 @@
 #include <wiringPi.h>
+#include <stdio.h>
+
 /**
  * Created by Five Letter
  * THIS CLASS IS NOTHING SPECIAL!!! This class is a wrapper
@@ -19,6 +21,7 @@ class SN_Gpio
      * Upon initialization failure the program will crash
      */
     SN_Gpio(){
+        printf("CONSTRUCTOR CALLED!!!\n");
         wiringPiSetup(); 
     };
  
@@ -90,6 +93,9 @@ class SN_Gpio
      */
     static SN_Gpio* instance(void)
     {
+        if (!c_instance) 
+            printf("Holy shit not intialized!! Will do it now!!\n");
+            c_instance = new SN_Gpio;
         return c_instance;
     };
 };

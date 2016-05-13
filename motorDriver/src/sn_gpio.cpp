@@ -1,35 +1,36 @@
 #include "../sn_gpio.hpp"
 #include <wiringPi.h>
 
-#ifdef __cplusplus
-extern "C"{
-#endif
+SN_Gpio* SN_Gpio::c_instance = 0;
 
 void SN_Gpio::SN_pin_mode(io_pin_e pin, pin_mode_e mode)
 {
-    pinMode((int) pin, (int) mode);   
+    if (mode == SNOUTPUT)
+        pinMode((int) pin, OUTPUT);
+    else
+        pinMode((int) pin, INPUT);   
 }
 
 void SN_Gpio::SN_pin_set(io_pin_e pin)
 {
-    digitalWrite((int) pin, 1);
+    digitalWrite((int) pin, HIGH);
 }
 
 void SN_Gpio::SN_pin_unset(io_pin_e pin)
 {
-    digitalWrite((int) pin, 0);
+    digitalWrite((int) pin, LOW);
 }
 
 void SN_Gpio::SN_pin_toggle(io_pin_e pin)
 {
     bool current_value = digitalRead((int) pin);
-    digitalWrite((int) pin, !current_value);
+    if (current_value)
+        digitalWrite((int) pin, LOW);
+    else 
+        digitalWrite((int) pin, HIGH);
 }
 
 bool SN_Gpio::SN_pin_read(io_pin_e pin)
 {
     return digitalRead((int) pin);
 }
-#ifdef __cplusplus
-}
-#endif
