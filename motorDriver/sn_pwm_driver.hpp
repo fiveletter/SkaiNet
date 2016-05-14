@@ -14,23 +14,25 @@ class SN_pwm_driver
 {
     private: 
     static SN_pwm_driver *c_instance;
-    const SN_pwm_driver_i2c i2c_inst; 
+    const SN_pwm_driver_i2c* i2c_inst; 
     
     static const uint16_t MAX_DUTY_CYCLE = 0x0FFF;
     static const uint16_t MIN_DUTY_CYCLE = 0x0000;
     static const unsigned int MAX_FREQUENCY  = 1526;
     static const unsigned int MIN_FREQUENCY  = 25;
 
-    static uint8_t current_duty_cycle = 50;
-    static unsigned int current_frequency = 0;
+    uint16_t current_duty_cycle;
+    unsigned int current_frequency;
    
     /**
      * Default constructor for PWM class.
      */
     SN_pwm_driver(): i2c_inst(SN_pwm_driver_i2c::instance())
     {
-       // set_frequency(500);
-       // set_duty_cycle(50);
+        current_duty_cycle = 0;
+        current_frequency = 0;
+        set_frequency(10);
+        set_duty_cycle(0x0200);
     };
 
     /**
@@ -38,9 +40,24 @@ class SN_pwm_driver
      *
      * @return true if reset succesfull false if error occurred
      */
-    void reset_driver();
+    bool reset_driver();
 
-    public:   
+    public:  
+    /**
+     * Returns the current duty cycle of the system
+     *
+     *
+     * @return current duty cycle
+     */ 
+    uint16_t get_current_duty_cycle(void);
+
+    /**
+     * Returns the current frequency of the system
+     *
+     * @return current duty cycle
+     */ 
+    unsigned int get_current_frequency(void);
+
     /** 
      * Set frequency of the PWM driver
      * 
@@ -55,7 +72,7 @@ class SN_pwm_driver
      * @param duty  frequency to write
      * @return mode  true if frequency successfully set
      */
-    bool set_duty_cycle(uint8_t duty_cycle);
+    bool set_duty_cycle(uint16_t duty_cycle);
 
     /**
      * Returns the instance of this singleton class. 

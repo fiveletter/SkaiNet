@@ -23,7 +23,7 @@ class SN_pwm_driver_i2c
      * with argument 0x42 (Device ID for pwm driver)
      * 
      * Upon initialization failure the program will crash
-     */
+    a*/
     SN_pwm_driver_i2c (): file_descriptor(wiringPiI2CSetup(DEVICE_ID))
     {
         // DO NOTHING
@@ -37,7 +37,7 @@ class SN_pwm_driver_i2c
      * @param data  8 bit value 
      * @param mode  mode we are setting, either OUTPUT or INPUT
      */
-    int SN_i2c_write_8bit(uint8_t reg, uint8_t data);
+    int SN_i2c_write_8bit(uint8_t reg, uint8_t data) const;
 
     /**
      * Read 8 bits of data to file_descriptor at specified register
@@ -45,7 +45,7 @@ class SN_pwm_driver_i2c
      * @param reg   register to read data from
      * @return      8 bit data received from i2c device   
      */
-    uint8_t SN_i2c_read_8bit(uint8_t reg);
+    uint8_t SN_i2c_read_8bit(uint8_t reg) const;
   
     /**
      * Returns the instance of this singleton class. 

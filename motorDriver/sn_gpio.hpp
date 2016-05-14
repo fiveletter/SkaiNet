@@ -9,10 +9,10 @@
  * as needed. This is only a subset of functions available
  */
 
-class SN_Gpio
+class SN_gpio
 {
     private: 
-    static SN_Gpio *c_instance;
+    static SN_gpio *c_instance;
 
     /**
      * Default constructor for GPIO class. This calls wiringPiSetup()
@@ -20,7 +20,7 @@ class SN_Gpio
      * 
      * Upon initialization failure the program will crash
      */
-    SN_Gpio(){
+    SN_gpio(){
         printf("CONSTRUCTOR CALLED!!!\n");
         wiringPiSetup(); 
     };
@@ -91,11 +91,11 @@ class SN_Gpio
      *
      * @return instance of SN_GPIO
      */
-    static SN_Gpio* instance(void)
+    static SN_gpio* instance(void)
     {
         if (!c_instance) 
             printf("Holy shit not intialized!! Will do it now!!\n");
-            c_instance = new SN_Gpio;
+            c_instance = new SN_gpio;
         return c_instance;
     };
 };
