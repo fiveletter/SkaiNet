@@ -22,6 +22,17 @@ void Motor_driver::hold_position()
     pwm_driver_inst->set_duty_cycle(PWM_PIN, 0x0000);
 }
 
+bool Motor_driver::is_faulted(void)
+{
+    SN_gpio* gpio_inst = SN_gpio::instance();
+    return gpio_inst->SN_pin_read(pin_ctrl.fault);
+}
+
+unsigned int  Motor_driver::get_speed(void)
+{
+    return 100; 
+}
+
 unsigned int Motor_driver::get_current_steps_per_rotation(void)
 {
     return current_steps_per_rotation;

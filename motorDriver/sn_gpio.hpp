@@ -96,7 +96,6 @@ class SN_gpio
     static SN_gpio* instance(void)
     {
         if (!c_instance) 
-            printf("Holy shit not intialized!! Will do it now!!\n");
             c_instance = new SN_gpio;
         return c_instance;
     };
