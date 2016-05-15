@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdint.h>
-#include "motorDriver/motor_driver.hpp"
+#include "motorDriver/motor_system.hpp"
 
 int main(void)
 {  
+   Motor_system* motor_sys_inst = Motor_system::instance();
+   motor_sys_inst->set_x_y_speed(0.134, -0.123);
+   printf("Is system faulted: %s\n", motor_sys_inst->is_faulted() ? "Yes" : "No");
+   printf("Current x speed: %f\n", motor_sys_inst->get_x_speed());
+   return 0;
+} 
+    /*
     Motor_driver driver1(400, PWM_0, PIN_2, PIN_3, PIN_21, PIN_22, PIN_23, PIN_24);
     driver1.print_pins();
 
@@ -21,8 +28,6 @@ int main(void)
     printf("Current step size: %x\n", driver1.get_current_step_size());
     
     
-    
-   /*
     unsigned int frequency = 1000;
     SN_pwm_driver* pwm_driver_inst = SN_pwm_driver::instance();
     uint16_t current_duty_cycle = pwm_driver_inst->get_current_duty_cycle();
@@ -68,5 +73,3 @@ int main(void)
         delay(500);
     }
     */   
-    return 0;
-}

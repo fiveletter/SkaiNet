@@ -55,7 +55,6 @@ class SN_pwm_driver_i2c
     static SN_pwm_driver_i2c* instance(void)
     {
         if (!c_instance) 
-            printf("Holy shit PWM not intialized!! Will do it now!!\n");
             c_instance = new SN_pwm_driver_i2c;
         return c_instance;
     };

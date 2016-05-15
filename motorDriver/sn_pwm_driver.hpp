@@ -88,7 +88,6 @@ class SN_pwm_driver
     static SN_pwm_driver* instance(void)
     {
         if (!c_instance) 
-            printf("Holy shit PWM not intialized!! Will do it now!!\n");
             c_instance = new SN_pwm_driver();
         return c_instance;
     };

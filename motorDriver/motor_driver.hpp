@@ -52,6 +52,9 @@ class Motor_driver
         pin_ctrl.fault  = flt;
     };
 
+    bool is_faulted(void);
+
+    unsigned int get_speed(void);
     /**
      * Returns the current steps per rotation
      *
