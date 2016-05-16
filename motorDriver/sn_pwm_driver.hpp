@@ -10,6 +10,11 @@
  * as needed. This is only a subset of functions available
  */
 
+typedef enum pwm_pin {
+    PWM_0 = 0,
+    PWM_1,
+} pwm_pin_e;
+
 class SN_pwm_driver
 {
     private: 
@@ -32,7 +37,8 @@ class SN_pwm_driver
         current_duty_cycle = 0;
         current_frequency = 0;
         set_frequency(10);
-        set_duty_cycle(0x0200);
+        set_duty_cycle(PWM_0,0x0200);
+        set_duty_cycle(PWM_1,0x0200);
     };
 
     /**
@@ -72,7 +78,7 @@ class SN_pwm_driver
      * @param duty  frequency to write
      * @return mode  true if frequency successfully set
      */
-    bool set_duty_cycle(uint16_t duty_cycle);
+    bool set_duty_cycle(pwm_pin_e pin,uint16_t duty_cycle);
 
     /**
      * Returns the instance of this singleton class. 

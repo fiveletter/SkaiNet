@@ -11,9 +11,12 @@ void SN_gpio::SN_pin_mode(io_pin_e pin, pin_mode_e mode)
         pinMode((int) pin, INPUT);   
 }
 
-void SN_gpio::SN_pin_set(io_pin_e pin)
+void SN_gpio::SN_pin_set(io_pin_e pin, bool set)
 {
-    digitalWrite((int) pin, HIGH);
+    if (set)
+        digitalWrite((int) pin, HIGH);
+    else
+        digitalWrite((int) pin, LOW);
 }
 
 void SN_gpio::SN_pin_unset(io_pin_e pin)

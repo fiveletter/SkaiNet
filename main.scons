@@ -5,6 +5,7 @@ sourceFiles = [
     'motorDriver/src/sn_gpio.cpp',
     'motorDriver/src/sn_pwm_driver.cpp',
     'motorDriver/src/sn_pwm_driver_i2c.cpp',
+    'motorDriver/src/motor_driver.cpp',
 ]
 
 compileTFlags = [

@@ -47,20 +47,20 @@ bool SN_pwm_driver::set_frequency(unsigned int frequency)
     return SN_pwm_driver::reset_driver();
 }
 
-bool SN_pwm_driver::set_duty_cycle(uint16_t duty_cycle)
+bool SN_pwm_driver::set_duty_cycle(pwm_pin_e pin, uint16_t duty_cycle)
 {
     const uint8_t BASE_PWM_0_ADDR = 0x08;
     const uint8_t BASE_PWM_1_ADDR = 0x0C;
 
     this->current_duty_cycle = duty_cycle;
-    
-    // Set duty cycle for PWM pin 0
-    SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_0_ADDR, duty_cycle);
-    SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_0_ADDR + 1, duty_cycle >> 8);
-    
-    // Set duty cycle for PWM pin 1
-    SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_1_ADDR, duty_cycle);
-    SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_1_ADDR + 1, duty_cycle >> 8);
-    
+    if (pin == PWM_0) {   
+        // Set duty cycle for PWM pin 0
+        SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_0_ADDR, duty_cycle);
+        SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_0_ADDR + 1, duty_cycle >> 8);
+    } else {
+        // Set duty cycle for PWM pin 1
+        SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_1_ADDR, duty_cycle);
+        SN_pwm_driver::i2c_inst->SN_i2c_write_8bit(BASE_PWM_1_ADDR + 1, duty_cycle >> 8);
+    }   
     return SN_pwm_driver::reset_driver();   
 }

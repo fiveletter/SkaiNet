@@ -9,6 +9,24 @@
  * as needed. This is only a subset of functions available
  */
 
+typedef enum io_pin {
+    PIN_0 = 0,
+    PIN_1 = 1,
+    PIN_2 = 2,
+    PIN_3 = 3,
+    PIN_4 = 4,
+    PIN_5 = 5,
+    PIN_6 = 6,
+    PIN_21 = 21,
+    PIN_22 = 22,
+    PIN_23 = 23,
+    PIN_24 = 24,
+    PIN_25 = 25,
+    PIN_27 = 27,
+    PIN_28 = 28,
+    PIN_29 = 29,
+} io_pin_e;
+
 class SN_gpio
 {
     private: 
@@ -26,22 +44,6 @@ class SN_gpio
     };
  
     public:   
-    typedef enum io_pin {
-        PIN_2 = 2,
-        PIN_3 = 3,
-        PIN_4 = 4,
-        PIN_5 = 5,
-        PIN_6 = 6,
-        PIN_21 = 21,
-        PIN_22 = 22,
-        PIN_23 = 23,
-        PIN_24 = 24,
-        PIN_25 = 25,
-        PIN_27 = 27,
-        PIN_28 = 28,
-        PIN_29 = 29,
-    } io_pin_e;
-
     typedef enum pin_mode {
         SNOUTPUT = 0,
         SNINPUT,
@@ -60,7 +62,7 @@ class SN_gpio
      *
      * @param pin   pin to set
      */
-    void SN_pin_set(io_pin_e pin);
+    void SN_pin_set(io_pin_e pin, bool set = true);
 
     /**
      * Writes LOW to the specified pin
