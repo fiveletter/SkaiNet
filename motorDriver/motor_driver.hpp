@@ -42,6 +42,7 @@ class Motor_driver
         current_steps_per_rotation = hardware_steps;
         current_step_size = STEP_1;
         current_motion = HOLD;
+        current_speed = 0;
 
         // Set control pins
         pin_ctrl.motor0 = m0;
@@ -50,6 +51,10 @@ class Motor_driver
         pin_ctrl.dir    = d;
         pin_ctrl.reset  = rst;
         pin_ctrl.fault  = flt;
+        
+        SN_gpio* gpio_inst = SN_gpio::instance();
+        
+        gpio_inst->SN_pin_set(rst);
     };
 
     bool is_faulted(void);
@@ -131,7 +136,7 @@ class Motor_driver
     unsigned int current_steps_per_rotation;
     step_size_e current_step_size;    
     motion_e current_motion;
-
+    unsigned int current_speed;
     /**
      * Sets the direction of the motor positive or negative
      *
