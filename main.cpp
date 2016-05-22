@@ -5,19 +5,31 @@
 int main(void)
 {  
     Motor_system* motor_sys_inst = Motor_system::instance();
-    motor_sys_inst->set_x_y_speed(0.134, -0.123);
     printf("Is system faulted: %s\n", motor_sys_inst->is_faulted() ? "Yes" : "No");
     printf("Current x speed: %f\n", motor_sys_inst->get_x_speed());
+    
+    bool toggle = false; 
 
-    delay(5000);
+    while(1){
+	if (toggle) {
+	    motor_sys_inst->set_x_y_speed(0.5, 0.0);
+            toggle = false;
+        } else {
+	    motor_sys_inst->set_x_y_speed(-0.5,0.0);
+            toggle = true;
+        }
+	delay(1000);
+    }
+  //  motor_sys_inst->set_x_y_speed(0.5, 0.0);
    
-    motor_sys_inst->set_x_y_speed(0.5, 0);
-   
-    delay(5000);
+   // delay(5000);
 
-    motor_sys_inst->set_x_y_speed(0, 0.5);
+   // motor_sys_inst->set_x_y_speed(-0.5, 0.0);
 
-    delay(5000);
+   // delay(5000);
+
+    motor_sys_inst->set_x_y_speed(0, 0);
+    motor_sys_inst->power_off();
 
     /*
     Motor_driver driver1(400, PWM_0, PIN_2, PIN_3, PIN_21, PIN_22, PIN_23, PIN_24);

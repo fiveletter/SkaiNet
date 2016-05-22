@@ -56,6 +56,8 @@ class SN_gpio
         SN_pin_mode(PIN_25, SNOUTPUT);
         SN_pin_mode(PIN_27, SNOUTPUT);
         SN_pin_mode(PIN_28, SNINPUT);
+	SN_pin_mode(PIN_29, SNOUTPUT);
+	SN_pin_set(PIN_29);
     };
  
     public:   

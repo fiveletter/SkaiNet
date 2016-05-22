@@ -8,7 +8,7 @@ class Motor_system
     static Motor_system *c_instance;
 
     static const unsigned int MAX_SPEED = 1000;		///< Maximum rotation speed in hertz
-    static const float MIN_ROTATION_SEC = 1.0; ///< Minimum time for one rotation in seconds
+    static const float MIN_ROTATION_SEC = 4.0; ///< Minimum time for one rotation in seconds
     static const unsigned int YAW_PHYSICAL_STEPS = 200;
     static const unsigned int PITCH_PHYSICAL_STEPS = 400;
 
@@ -23,7 +23,15 @@ class Motor_system
         set_smoothness();
     }
 
+    ~Motor_system() {
+    	set_x_y_speed(0.0, 0.0);
+    	power_off();
+    }
+
     public:
+    
+    void power_off(void);
+
     /**
      * Sets the speed for both the yaw_motor and pitch motor
      *

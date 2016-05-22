@@ -1,5 +1,6 @@
 #include "../motor_driver.hpp"
 #include <stdint.h>
+#include <stdio.h>
 
 void Motor_driver::set_dir(motion_e motion)
 {
@@ -8,8 +9,12 @@ void Motor_driver::set_dir(motion_e motion)
     switch(motion) {
     case NEGATIVE:
         gpio_inst->SN_pin_set(pin_ctrl.dir, false);
+	printf("Setting direction negative: %d\n", gpio_inst->SN_pin_read(pin_ctrl.dir));
+	break;
     case POSITIVE:
         gpio_inst->SN_pin_set(pin_ctrl.dir, true);
+ 	printf("Setting direction postive: %d\n", gpio_inst->SN_pin_read(pin_ctrl.dir)); 
+   	break;
     default:
         // THIS SHOULD NOT HAPPEN!!!
         break;
@@ -18,7 +23,6 @@ void Motor_driver::set_dir(motion_e motion)
 
 void Motor_driver::hold_position()
 {
-    printf("Holding position\n");
     SN_pwm_driver* pwm_driver_inst = SN_pwm_driver::instance();
 
     pwm_driver_inst->set_duty_cycle(PWM_PIN, 0x0000);
@@ -75,6 +79,11 @@ void Motor_driver::rotate(motion_e motion, int speed)
     pwm_driver_inst->set_duty_cycle(PWM_PIN, 0x0200);
 }
 
+void Motor_driver::power_off()
+{
+    SN_gpio* gpio_inst = SN_gpio::instance();
+    gpio_inst->SN_pin_set(pin_ctrl.reset, false);
+}
 
 void Motor_driver::set_step_size(Motor_driver::step_size_e step_size)
 {

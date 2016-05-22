@@ -60,7 +60,15 @@ class Motor_driver
     bool is_faulted(void);
 
     unsigned int get_speed(void);
+   
     /**
+     * Returns the current steps per rotation
+     *
+     * @return unsigned int of steps per rotation
+     */
+    void power_off(void);
+
+     /**
      * Returns the current steps per rotation
      *
      * @return unsigned int of steps per rotation

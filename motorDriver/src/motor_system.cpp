@@ -10,19 +10,29 @@ void Motor_system::set_x_y_speed(float x_speed, float y_speed)
     if (x_speed < 0) {
 	    // Horizontal motor rotates counter-clockwise
 	    yaw_motor->rotate(Motor_driver::NEGATIVE, abs(x_speed * Motor_system::MAX_SPEED));
+	printf("Setting negative rotation yaw\n");
     }
     else {
 	    // Horizontal motor rotates clockwise
 	    yaw_motor->rotate(Motor_driver::POSITIVE, abs(x_speed * Motor_system::MAX_SPEED));
-    }
+	printf("Setting postive rotation yaw\n");   
+ }
     if (y_speed < 0) {
 	    // Vertical motor rotates counter-clockwise
 	    pitch_motor->rotate(Motor_driver::NEGATIVE, abs(y_speed * Motor_system::MAX_SPEED));
-    }
+  	printf("Setting negative pitch\n");
+	  }
     else {
 	    // Vertical motor rotates clockwise
 	    pitch_motor->rotate(Motor_driver::POSITIVE, abs(y_speed * Motor_system::MAX_SPEED));
-    }
+    printf("Setting positive pitch\n");
+	}
+}
+
+void Motor_system::power_off()
+{
+    pitch_motor->power_off();
+    yaw_motor->power_off();
 }
 
 bool Motor_system::is_faulted()
