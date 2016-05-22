@@ -83,6 +83,11 @@ void Motor_driver::power_off()
 {
     SN_gpio* gpio_inst = SN_gpio::instance();
     gpio_inst->SN_pin_set(pin_ctrl.reset, false);
+
+void Motor_driver::power_on(void)
+{
+    SN_gpio* gpio_inst = SN_gpio::instance();
+    gpio_inst->SN_pin_set(pin_ctrl.reset, true);
 }
 
 void Motor_driver::set_step_size(Motor_driver::step_size_e step_size)

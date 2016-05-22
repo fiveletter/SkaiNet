@@ -17,8 +17,8 @@ class Motor_system
 
     Motor_system() {	///< Default constructor for Motor_sytem class
         printf("Called default constructor of motor system!!!\n");
-        pitch_motor = new Motor_driver(PITCH_PHYSICAL_STEPS, PWM_0, PIN_2, PIN_3, PIN_21, PIN_22, PIN_23, PIN_24);
-        yaw_motor   = new Motor_driver(YAW_PHYSICAL_STEPS, PWM_1, PIN_4, PIN_5, PIN_6, PIN_25, PIN_27, PIN_28);
+        pitch_motor = new Motor_driver(PITCH_PHYSICAL_STEPS, PWM_0, PIN_2, PIN_3, PIN_21, PIN_22, PIN_23, PIN_24, PIN_0);
+        yaw_motor   = new Motor_driver(YAW_PHYSICAL_STEPS, PWM_1, PIN_4, PIN_5, PIN_6, PIN_25, PIN_27, PIN_28, PIN_1);
 
         set_smoothness();
     }
@@ -29,8 +29,9 @@ class Motor_system
     }
 
     public:
-    
     void power_off(void);
+
+    void power_on(void);
 
     /**
      * Sets the speed for both the yaw_motor and pitch motor

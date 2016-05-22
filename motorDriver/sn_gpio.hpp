@@ -42,6 +42,7 @@ class SN_gpio
         printf("CONSTRUCTOR CALLED!!!\n");
         wiringPiSetup(); 
         // Setting up first set of pins
+        SN_pin_mode(PIN_0, SNOUTPUT);
         SN_pin_mode(PIN_2, SNOUTPUT); 
         SN_pin_mode(PIN_3, SNOUTPUT);
         SN_pin_mode(PIN_21, SNOUTPUT);
@@ -50,6 +51,7 @@ class SN_gpio
         SN_pin_mode(PIN_24, SNINPUT);
 
         // Setting up second set of pins
+        SN_pin_mode(PIN_1, SNOUTPUT);
         SN_pin_mode(PIN_4, SNOUTPUT);
         SN_pin_mode(PIN_5, SNOUTPUT);
         SN_pin_mode(PIN_6, SNOUTPUT);
