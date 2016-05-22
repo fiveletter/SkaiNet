@@ -35,6 +35,12 @@ void Motor_system::power_off()
     yaw_motor->power_off();
 }
 
+void Motor_system::power_on()
+{
+    pitch_motor->power_on();
+    yaw_motor->power_on();
+}
+
 bool Motor_system::is_faulted()
 {	
     // Check if either motor is faulted

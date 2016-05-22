@@ -29,8 +29,9 @@ class Motor_system
     }
 
     public:
-    
     void power_off(void);
+
+    void power_on(void);
 
     /**
      * Sets the speed for both the yaw_motor and pitch motor
