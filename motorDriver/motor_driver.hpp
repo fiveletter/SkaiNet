@@ -35,7 +35,7 @@ class Motor_driver
      * Upon initialization failure the program will crash
      */
     Motor_driver(unsigned int hardware_steps, pwm_pin_e pin, io_pin m0, io_pin m1, io_pin m2, 
-                                              io_pin d, io_pin rst, io_pin flt):
+                                              io_pin d, io_pin rst, io_pin flt, io_pin sleep):
         PWM_PIN(pin),
         PHYSICAL_STEPS_PER_ROTATION(hardware_steps){
         
@@ -51,6 +51,7 @@ class Motor_driver
         pin_ctrl.dir    = d;
         pin_ctrl.reset  = rst;
         pin_ctrl.fault  = flt;
+        pin_ctrl.sleep  = sleep;
         
         SN_gpio* gpio_inst = SN_gpio::instance();
         
@@ -73,6 +74,8 @@ class Motor_driver
      *
      * @return unsigned int of steps per rotation
      */
+    void power_on(void);
+
     unsigned int get_current_steps_per_rotation(void);
 
     /**
@@ -126,6 +129,7 @@ class Motor_driver
         printf("Dir pin: %d\n", pin_ctrl.dir);
         printf("Fault pin: %d\n", pin_ctrl.fault);
         printf("Reset pin: %d\n", pin_ctrl.reset);
+        printf("Sleep pin: %d\n", pin_ctrl.sleep);
     }
     private: 
     typedef struct pin_ctrl {
@@ -135,6 +139,7 @@ class Motor_driver
         io_pin dir;
         io_pin reset;
         io_pin fault;
+        io_pin sleep;
     } pin_ctrl_s;
    
     // Class Properties 
